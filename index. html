@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran Anggota HIMSI</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen p-4 md:p-8">
+    <div class="max-w-4xl mx-auto space-y-6">
+        <!-- Header -->
+        <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg text-center">
+            <h1 class="text-2xl font-bold text-blue-400">Pendaftaran Anggota HIMSI</h1>
+            <p class="text-sm text-slate-400 mt-1">Silakan isi data diri dengan benar.</p>
+        </div>
+
+        <!-- Form Pendaftaran -->
+        <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+            <form id="pendaftaranForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Nama Lengkap</label>
+                    <input type="text" id="nama" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 text-slate-100" placeholder="Masukkan nama lengkap">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-1">NIM</label>
+                    <input type="text" id="nim" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 text-slate-100" placeholder="Masukkan NIM">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Nomor HP / WhatsApp</label>
+                    <input type="tel" id="no_hp" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 text-slate-100" placeholder="Contoh: 081234567890">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition duration-200 cursor-pointer">
+                    Kirim Pendaftaran
+                </button>
+            </form>
+        </div>
+
+        <!-- Rekap Pendaftar -->
+        <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg space-y-4">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <h2 class="text-xl font-bold text-slate-200">Data Pendaftar Masuk</h2>
+                <button onclick="exportToCSV()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium py-2 px-4 rounded-lg transition duration-200 cursor-pointer">
+                    Download CSV / Excel
+                </button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-700 text-slate-400 text-sm">
+                            <th class="py-3 px-4">Waktu Daftar</th>
+                            <th class="py-3 px-4">Nama</th>
+                            <th class="py-3 px-4">NIM</th>
+                            <th class="py-3 px-4">No. HP / WA</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelPendaftar" class="divide-y divide-slate-700 text-sm">
+                        <!-- Data masuk lewat JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('pendaftaranForm');
+        const tabelPendaftar = document.getElementById('tabelPendaftar');
+        let dataPendaftar = JSON.parse(localStorage.getItem('data_pendaftar_himsi_umum')) || [];
+
+        function renderTable() {
+            tabelPendaftar.innerHTML = '';
+            if (dataPendaftar.length === 0) {
+                tabelPendaftar.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-slate-500">Belum ada data pendaftar.</td></tr>`;
+                return;
+            }
+            dataPendaftar.forEach((item) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="py-3 px-4 text-slate-400">${item.waktu}</td>
+                    <td class="py-3 px-4 font-medium text-slate-200">${item.nama}</td>
+                    <td class="py-3 px-4 text-slate-300">${item.nim}</td>
+                    <td class="py-3 px-4 text-slate-300">${item.no_hp}</td>
+                `;
+                tabelPendaftar.appendChild(row);
+            });
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const now = new Date();
+            const waktuString = now.toLocaleDateString('id-ID') + ' ' + now.toLocaleTimeString('id-ID', {hour: '2-digit', minute:'2-digit'});
+
+            const newData = {
+                waktu: waktuString,
+                nama: document.getElementById('nama').value,
+                nim: document.getElementById('nim').value,
+                no_hp: document.getElementById('no_hp').value
+            };
+
+            dataPendaftar.unshift(newData);
+            localStorage.setItem('data_pendaftar_himsi_umum', JSON.stringify(dataPendaftar));
+            renderTable();
+            form.reset();
+            alert('Pendaftaran berhasil dikirim!');
+        });
+
+        function exportToCSV() {
+            if (dataPendaftar.length === 0) {
+                alert('Belum ada data buat diexport!');
+                return;
+            }
+            let csvContent = "data:text/csv;charset=utf-8,Waktu Daftar,Nama,NIM,No HP\r\n";
+            dataPendaftar.forEach(row => {
+                csvContent += `"${row.waktu}","${row.nama}","${row.nim}","${row.no_hp}"\r\n`;
+            });
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "pendaftar_anggota_himsi.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        renderTable();
+    </script>
+</body>
+</html>
