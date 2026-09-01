@@ -5,68 +5,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pendaftaran Anggota HIMSI</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        /* Efek Background Robot Watermark yang Elegan */
+        body {
+            background-color: #0b1329;
+            background-image: linear-gradient(to bottom, rgba(11, 19, 41, 0.92), rgba(15, 23, 42, 0.95)), url('robot_bg.png');
+            background-size: 350px auto;
+            background-position: center;
+            background-repeat: repeat;
+            background-attachment: fixed;
+        }
+    </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen p-4 md:p-8">
+<body class="text-slate-100 min-h-screen p-4 md:p-8">
     <div class="max-w-4xl mx-auto space-y-6">
-        <!-- Header -->
-        <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg text-center">
-            <h1 class="text-2xl font-bold text-blue-400">Pendaftaran Anggota HIMSI</h1>
-            <p class="text-sm text-slate-400 mt-1">Silakan isi data diri dengan benar untuk bergabung.</p>
+        <!-- Header dengan Logo Kiri & Kanan -->
+        <div class="bg-slate-900/90 backdrop-blur-md p-6 rounded-2xl border border-blue-500/30 shadow-2xl flex items-center justify-between gap-4">
+            <!-- Logo Kiri -->
+            <div class="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 bg-slate-950/80 rounded-xl border border-blue-500/30 flex items-center justify-center p-1 overflow-hidden shadow-inner">
+                <img src="logo_himsi.png" alt="Logo HIMSI" class="w-full h-full object-contain" onerror="this.src='https://placehold.co/80x80/0f172a/38bdf8?text=HIMSI'">
+            </div>
+
+            <!-- Judul Tengah -->
+            <div class="text-center flex-grow">
+                <span class="text-xs uppercase tracking-widest text-blue-400 font-semibold">Open Recruitment</span>
+                <h1 class="text-xl sm:text-2xl font-extrabold text-white mt-0.5 tracking-wide">Pendaftaran Anggota HIMSI</h1>
+                <p class="text-xs sm:text-sm text-slate-300 mt-1">Himpunan Mahasiswa Sistem Information • ITB Swadharma</p>
+            </div>
+
+            <!-- Logo Kanan -->
+            <div class="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 bg-slate-950/80 rounded-xl border border-blue-500/30 flex items-center justify-center p-1 overflow-hidden shadow-inner">
+                <img src="logo_itbs.png" alt="Logo ITBS" class="w-full h-full object-contain" onerror="this.src='https://placehold.co/80x80/0f172a/38bdf8?text=ITBS'">
+            </div>
         </div>
 
         <!-- Form Pendaftaran -->
-        <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <div class="bg-slate-900/90 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-blue-500/30 shadow-2xl">
             <form id="pendaftaranForm" class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-slate-300 mb-1">Nama Lengkap</label>
-                    <input type="text" id="nama" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 text-slate-100" placeholder="Masukkan nama lengkap">
+                    <input type="text" id="nama" required class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500 text-slate-100 placeholder-slate-500 shadow-inner" placeholder="Masukkan nama lengkap">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">NIM</label>
+                        <input type="text" id="nim" required class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500 text-slate-100 placeholder-slate-500 shadow-inner" placeholder="Masukkan NIM">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Nomor HP / WhatsApp</label>
+                        <input type="tel" id="no_hp" required class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500 text-slate-100 placeholder-slate-500 shadow-inner" placeholder="Contoh: 081234567890">
+                    </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-300 mb-1">NIM</label>
-                    <input type="text" id="nim" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 text-slate-100" placeholder="Masukkan NIM">
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Alamat Email Aktif</label>
+                    <input type="email" id="email" required class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500 text-slate-100 placeholder-slate-500 shadow-inner" placeholder="Contoh: nama@gmail.com">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-300 mb-1">Nomor HP / WhatsApp</label>
-                    <input type="tel" id="no_hp" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 text-slate-100" placeholder="Contoh: 081234567890">
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Alasan Masuk HIMSI</label>
+                    <textarea id="alasan" rows="3" required class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500 text-slate-100 placeholder-slate-500 shadow-inner resize-none" placeholder="Tuliskan alasan singkat ingin bergabung dengan HIMSI..."></textarea>
                 </div>
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition duration-200 cursor-pointer">
+                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-3 px-4 rounded-xl shadow-lg transition duration-200 cursor-pointer tracking-wide">
                     Kirim Pendaftaran
                 </button>
             </form>
         </div>
 
         <!-- Panel Khusus Admin / Pengurus -->
-        <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg space-y-4">
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-slate-700 pb-4">
+        <div class="bg-slate-900/90 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-blue-500/30 shadow-2xl space-y-4">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-slate-800 pb-4">
                 <div>
-                    <h2 class="text-xl font-bold text-slate-200">Panel Rekap Admin</h2>
+                    <h2 class="text-xl font-bold text-white">Panel Rekap Admin</h2>
                     <p class="text-xs text-slate-400 mt-0.5">Khusus pengurus untuk melihat data dan download Excel.</p>
                 </div>
                 <div id="loginSection" class="flex gap-2 w-full sm:w-auto">
-                    <input type="password" id="adminPassword" placeholder="Password Admin" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500">
-                    <button onclick="cekAdmin()" class="bg-slate-700 hover:bg-slate-600 text-white text-sm font-medium px-4 py-1.5 rounded-lg transition duration-200 cursor-pointer">Buka</button>
+                    <input type="password" id="adminPassword" placeholder="Password Admin" class="bg-slate-950/80 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-blue-500 shadow-inner">
+                    <button onclick="cekAdmin()" class="bg-slate-800 hover:bg-slate-700 text-white text-sm font-medium px-4 py-2 rounded-xl transition duration-200 cursor-pointer border border-slate-700">Buka</button>
                 </div>
             </div>
 
             <!-- Bagian Tabel yang Dikunci -->
             <div id="adminPanel" class="hidden space-y-4">
                 <div class="flex justify-between items-center">
-                    <span class="text-sm text-emerald-400 font-medium">✔ Akses Admin Terbuka</span>
-                    <button onclick="exportToCSV()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium py-2 px-4 rounded-lg transition duration-200 cursor-pointer">
+                    <span class="text-sm text-emerald-400 font-medium flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Akses Admin Terbuka
+                    </span>
+                    <button onclick="exportToCSV()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium py-2 px-4 rounded-xl shadow transition duration-200 cursor-pointer">
                         Download CSV / Excel
                     </button>
                 </div>
-                <div class="overflow-x-auto">
+                <div class="overflow-x-auto rounded-xl border border-slate-800">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="border-b border-slate-700 text-slate-400 text-sm">
-                                <th class="py-3 px-4">Waktu Daftar</th>
+                            <tr class="bg-slate-950/60 border-b border-slate-800 text-slate-400 text-xs uppercase tracking-wider">
+                                <th class="py-3 px-4">Waktu</th>
                                 <th class="py-3 px-4">Nama</th>
                                 <th class="py-3 px-4">NIM</th>
                                 <th class="py-3 px-4">No. HP / WA</th>
+                                <th class="py-3 px-4">Email</th>
+                                <th class="py-3 px-4">Alasan Masuk</th>
                             </tr>
                         </thead>
-                        <tbody id="tabelPendaftar" class="divide-y divide-slate-700 text-sm">
+                        <tbody id="tabelPendaftar" class="divide-y divide-slate-800/60 text-sm">
                             <!-- Data masuk lewat JS -->
                         </tbody>
                     </table>
@@ -78,7 +117,7 @@
     <script>
         const form = document.getElementById('pendaftaranForm');
         const tabelPendaftar = document.getElementById('tabelPendaftar');
-        let dataPendaftar = JSON.parse(localStorage.getItem('data_pendaftar_baru_himsi')) || [];
+        let dataPendaftar = JSON.parse(localStorage.getItem('data_pendaftar_himsi_v2')) || [];
 
         // PASSWORD ADMIN
         const PASSWORD_RAHASIA = "himsi2026";
@@ -97,16 +136,18 @@
         function renderTable() {
             tabelPendaftar.innerHTML = '';
             if (dataPendaftar.length === 0) {
-                tabelPendaftar.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-slate-500">Belum ada data pendaftar.</td></tr>`;
+                tabelPendaftar.innerHTML = `<tr><td colspan="6" class="py-6 text-center text-slate-500 italic">Belum ada data pendaftar.</td></tr>`;
                 return;
             }
             dataPendaftar.forEach((item) => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td class="py-3 px-4 text-slate-400">${item.waktu}</td>
-                    <td class="py-3 px-4 font-medium text-slate-200">${item.nama}</td>
-                    <td class="py-3 px-4 text-slate-300">${item.nim}</td>
-                    <td class="py-3 px-4 text-slate-300">${item.no_hp}</td>
+                    <td class="py-3 px-4 text-slate-400 whitespace-nowrap text-xs">${item.waktu}</td>
+                    <td class="py-3 px-4 font-medium text-slate-100 whitespace-nowrap">${item.nama}</td>
+                    <td class="py-3 px-4 text-slate-300 whitespace-nowrap">${item.nim}</td>
+                    <td class="py-3 px-4 text-slate-300 whitespace-nowrap">${item.no_hp}</td>
+                    <td class="py-3 px-4 text-slate-300 whitespace-nowrap">${item.email}</td>
+                    <td class="py-3 px-4 text-slate-300 min-w-[200px]">${item.alasan}</td>
                 `;
                 tabelPendaftar.appendChild(row);
             });
@@ -121,11 +162,13 @@
                 waktu: waktuString,
                 nama: document.getElementById('nama').value,
                 nim: document.getElementById('nim').value,
-                no_hp: document.getElementById('no_hp').value
+                no_hp: document.getElementById('no_hp').value,
+                email: document.getElementById('email').value,
+                alasan: document.getElementById('alasan').value
             };
 
             dataPendaftar.unshift(newData);
-            localStorage.setItem('data_pendaftar_baru_himsi', JSON.stringify(dataPendaftar));
+            localStorage.setItem('data_pendaftar_himsi_v2', JSON.stringify(dataPendaftar));
             form.reset();
             alert('Pendaftaran berhasil dikirim! Terima kasih.');
         });
@@ -135,9 +178,11 @@
                 alert('Belum ada data buat diexport!');
                 return;
             }
-            let csvContent = "data:text/csv;charset=utf-8,Waktu Daftar,Nama,NIM,No HP\r\n";
+            let csvContent = "data:text/csv;charset=utf-8,Waktu Daftar,Nama,NIM,No HP,Email,Alasan Masuk\r\n";
             dataPendaftar.forEach(row => {
-                csvContent += `"${row.waktu}","${row.nama}","${row.nim}","${row.no_hp}"\r\n`;
+                // Bersihkan koma atau enter di alasan agar format CSV aman
+                let cleanAlasan = row.alasan.replace(/"/g, '""').replace(/(\r\n|\n|\r)/gm, " ");
+                csvContent += `"${row.waktu}","${row.nama}","${row.nim}","${row.no_hp}","${row.email}","${cleanAlasan}"\r\n`;
             });
             const encodedUri = encodeURI(csvContent);
             const link = document.createElement("a");
