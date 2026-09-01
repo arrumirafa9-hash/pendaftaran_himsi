@@ -27,34 +27,34 @@
             pointer-events: none;
         }
 
-        /* Kotak Utama dengan Efek Border Cyber */
+        /* Kotak Kartu Utama dengan Aksen Sirkuit Cyber */
         .cyber-card {
-            background: rgba(10, 15, 30, 0.92);
+            background: rgba(10, 15, 30, 0.93);
             backdrop-filter: blur(16px);
             border: 2px solid #06b6d4;
             box-shadow: 0 0 30px rgba(6, 182, 212, 0.25), inset 0 0 20px rgba(6, 182, 212, 0.1);
             position: relative;
+            overflow: hidden;
         }
 
-        /* Hiasan Titik Node & Cabang Kabel Sirkuit di Sudut Kotak */
-        .cyber-card::before {
-            content: '';
+        /* Dekorasi SVG Jalur Kabel Sirkuit Siku & Titik Node di Sudut */
+        .circuit-corner-tl {
             position: absolute;
-            top: -7px; left: 25px;
-            width: 100px; height: 3px;
-            background: #38bdf8;
-            box-shadow: 0 0 10px #06b6d4, 100px 0 0 #38bdf8, 100px -4px 0 #38bdf8; /* Efek cabang titik sirkuit */
+            top: 0; left: 0;
+            width: 70px; height: 70px;
+            pointer-events: none;
+            opacity: 0.85;
         }
-        .cyber-card::after {
-            content: '';
+        .circuit-corner-br {
             position: absolute;
-            bottom: -7px; right: 25px;
-            width: 100px; height: 3px;
-            background: #38bdf8;
-            box-shadow: 0 0 10px #06b6d4, -100px 0 0 #38bdf8, -100px 4px 0 #38bdf8; /* Efek cabang titik sirkuit */
+            bottom: 0; right: 0;
+            width: 70px; height: 70px;
+            pointer-events: none;
+            transform: rotate(180deg);
+            opacity: 0.85;
         }
 
-        /* Kotak Input dengan Border Kabel Sirkuit Menyala */
+        /* Kotak Input ala Terminal / Panel Sistem */
         .cyber-input {
             background: rgba(3, 7, 18, 0.95);
             border: 1px solid rgba(6, 182, 212, 0.5);
@@ -68,15 +68,15 @@
             outline: none;
         }
 
-        /* Garis Pemisah ala Motherboard Bercabang */
-        .circuit-line {
+        /* Garis Pemisah Sirkuit Tengah */
+        .circuit-divider {
             height: 2px;
             background: linear-gradient(90deg, transparent, #06b6d4, #38bdf8, #06b6d4, transparent);
             box-shadow: 0 0 10px #06b6d4;
-            margin: 12px 0;
+            margin: 14px 0;
             position: relative;
         }
-        .circuit-line::after {
+        .circuit-divider::after {
             content: '';
             position: absolute;
             top: -3px; left: 50%;
@@ -89,33 +89,50 @@
     </style>
 </head>
 <body class="text-slate-100 min-h-screen p-4 md:p-8 relative">
+    
+    <!-- Template SVG Jalur Kabel Sirkuit Siku & Titik Node -->
+    <svg style="display: none;">
+        <g id="circuit-path">
+            <path d="M 0 15 L 25 15 L 40 30 L 65 30" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" style="filter: drop-shadow(0 0 4px #06b6d4);"/>
+            <circle cx="40" cy="30" r="3.5" fill="#38bdf8" style="filter: drop-shadow(0 0 6px #38bdf8);" />
+            <circle cx="65" cy="30" r="2.5" fill="#06b6d4" />
+            <path d="M 15 0 L 15 40 L 25 50 L 50 50" fill="none" stroke="#06b6d4" stroke-width="2" />
+        </g>
+    </svg>
+
     <div class="max-w-4xl mx-auto space-y-6 relative z-10">
         <!-- Header dengan Logo Kiri & Kanan -->
         <div class="cyber-card p-6 rounded-2xl flex items-center justify-between gap-4">
+            <svg class="circuit-corner-tl"><use href="#circuit-path"/></svg>
+            <svg class="circuit-corner-br"><use href="#circuit-path"/></svg>
+
             <!-- Logo Kiri (4984.jpg) -->
-            <div class="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 bg-slate-950/90 rounded-xl border border-cyan-400 flex items-center justify-center p-1.5 overflow-hidden shadow-[0_0_15px_rgba(6,182,212,0.4)]">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 bg-slate-950/90 rounded-xl border border-cyan-400 flex items-center justify-center p-1.5 overflow-hidden shadow-[0_0_15px_rgba(6,182,212,0.4)] z-10">
                 <img src="4984.jpg" alt="Logo HIMSI" class="w-full h-full object-contain" onerror="this.src='https://placehold.co/80x80/0f172a/38bdf8?text=HIMSI'">
             </div>
 
             <!-- Judul Tengah -->
-            <div class="text-center flex-grow">
+            <div class="text-center flex-grow z-10">
                 <span class="text-[10px] sm:text-xs uppercase tracking-widest text-cyan-300 font-bold bg-cyan-950/80 px-3 py-1 rounded-full border border-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.5)]">Open Recruitment</span>
                 <h1 class="text-xl sm:text-2xl font-black text-white mt-2 tracking-wide">Pendaftaran Anggota HIMSI</h1>
                 <p class="text-xs sm:text-sm text-slate-300 mt-0.5">Himpunan Mahasiswa Sistem Informasi • ITB Swadharma</p>
             </div>
 
             <!-- Logo Kanan (4987.jpg) -->
-            <div class="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 bg-slate-950/90 rounded-xl border border-cyan-400 flex items-center justify-center p-1.5 overflow-hidden shadow-[0_0_15px_rgba(6,182,212,0.4)]">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 bg-slate-950/90 rounded-xl border border-cyan-400 flex items-center justify-center p-1.5 overflow-hidden shadow-[0_0_15px_rgba(6,182,212,0.4)] z-10">
                 <img src="4987.jpg" alt="Logo ITBS" class="w-full h-full object-contain" onerror="this.src='https://placehold.co/80x80/0f172a/38bdf8?text=ITBS'">
             </div>
         </div>
 
-        <!-- Form Pendaftaran dengan Efek Kabel Sirkuit Bercabang -->
+        <!-- Form Pendaftaran dengan Aksen Kabel Sirkuit Sudut -->
         <div class="cyber-card p-6 sm:p-8 rounded-2xl">
-            <div class="mb-4 pb-2 flex items-center justify-between">
+            <svg class="circuit-corner-tl"><use href="#circuit-path"/></svg>
+            <svg class="circuit-corner-br"><use href="#circuit-path"/></svg>
+
+            <div class="mb-4 pb-2 flex items-center justify-between relative z-10">
                 <div class="flex items-center gap-2">
                     <span class="text-lg">🤖</span>
-                    <span class="text-xs font-mono text-cyan-300 tracking-wider font-bold">>> SYSTEM_CIRCUIT_BRANCH_REGISTRATION</span>
+                    <span class="text-xs font-mono text-cyan-300 tracking-wider font-bold">>> SYSTEM_CIRCUIT_NODE_PORTAL</span>
                 </div>
                 <span class="flex h-2 w-2 relative">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
@@ -123,9 +140,9 @@
                 </span>
             </div>
             
-            <div class="circuit-line"></div>
+            <div class="circuit-divider"></div>
 
-            <form id="pendaftaranForm" class="space-y-4 pt-2">
+            <form id="pendaftaranForm" class="space-y-4 pt-2 relative z-10">
                 <div>
                     <label class="block text-sm font-semibold text-cyan-300 mb-1 flex items-center gap-1.5">
                         <span>⚡</span> Nama Lengkap
@@ -159,7 +176,7 @@
                     <textarea id="alasan" rows="3" required class="w-full cyber-input rounded-xl px-4 py-3 placeholder-slate-500 resize-none" placeholder="Tuliskan alasan singkat ingin bergabung dengan HIMSI..."></textarea>
                 </div>
                 
-                <div class="circuit-line"></div>
+                <div class="circuit-divider"></div>
 
                 <button type="submit" class="w-full bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-[0_0_25px_rgba(6,182,212,0.6)] transition duration-200 cursor-pointer tracking-wider uppercase text-sm border-2 border-cyan-400 flex items-center justify-center gap-2">
                     <span>🚀</span> Kirim Pendaftaran
@@ -169,7 +186,10 @@
 
         <!-- Panel Khusus Admin / Pengurus -->
         <div class="cyber-card p-6 sm:p-8 rounded-2xl space-y-4">
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pb-2">
+            <svg class="circuit-corner-tl"><use href="#circuit-path"/></svg>
+            <svg class="circuit-corner-br"><use href="#circuit-path"/></svg>
+
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pb-2 relative z-10">
                 <div>
                     <h2 class="text-xl font-bold text-white flex items-center gap-2">
                         <span>🔐</span> Panel Rekap Admin
@@ -182,10 +202,10 @@
                 </div>
             </div>
 
-            <div class="circuit-line"></div>
+            <div class="circuit-divider relative z-10"></div>
 
             <!-- Bagian Tabel yang Dikunci -->
-            <div id="adminPanel" class="hidden space-y-4 pt-2">
+            <div id="adminPanel" class="hidden space-y-4 pt-2 relative z-10">
                 <div class="flex justify-between items-center">
                     <span class="text-sm text-emerald-400 font-medium flex items-center gap-1.5">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Akses Admin Terbuka
