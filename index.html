@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +12,7 @@
         <!-- Header -->
         <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg text-center">
             <h1 class="text-2xl font-bold text-blue-400">Pendaftaran Anggota HIMSI</h1>
-            <p class="text-sm text-slate-400 mt-1">Silakan isi data diri dengan benar.</p>
+            <p class="text-sm text-slate-400 mt-1">Silakan isi data diri dengan benar untuk bergabung.</p>
         </div>
 
         <!-- Form Pendaftaran -->
@@ -35,28 +36,42 @@
             </form>
         </div>
 
-        <!-- Rekap Pendaftar -->
+        <!-- Panel Khusus Admin / Pengurus -->
         <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg space-y-4">
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                <h2 class="text-xl font-bold text-slate-200">Data Pendaftar Masuk</h2>
-                <button onclick="exportToCSV()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium py-2 px-4 rounded-lg transition duration-200 cursor-pointer">
-                    Download CSV / Excel
-                </button>
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-slate-700 pb-4">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-200">Panel Rekap Admin</h2>
+                    <p class="text-xs text-slate-400 mt-0.5">Khusus pengurus untuk melihat data dan download Excel.</p>
+                </div>
+                <div id="loginSection" class="flex gap-2 w-full sm:w-auto">
+                    <input type="password" id="adminPassword" placeholder="Password Admin" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500">
+                    <button onclick="cekAdmin()" class="bg-slate-700 hover:bg-slate-600 text-white text-sm font-medium px-4 py-1.5 rounded-lg transition duration-200 cursor-pointer">Buka</button>
+                </div>
             </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="border-b border-slate-700 text-slate-400 text-sm">
-                            <th class="py-3 px-4">Waktu Daftar</th>
-                            <th class="py-3 px-4">Nama</th>
-                            <th class="py-3 px-4">NIM</th>
-                            <th class="py-3 px-4">No. HP / WA</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabelPendaftar" class="divide-y divide-slate-700 text-sm">
-                        <!-- Data masuk lewat JS -->
-                    </tbody>
-                </table>
+
+            <!-- Bagian Tabel yang Dikunci -->
+            <div id="adminPanel" class="hidden space-y-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-emerald-400 font-medium">✔ Akses Admin Terbuka</span>
+                    <button onclick="exportToCSV()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium py-2 px-4 rounded-lg transition duration-200 cursor-pointer">
+                        Download CSV / Excel
+                    </button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-700 text-slate-400 text-sm">
+                                <th class="py-3 px-4">Waktu Daftar</th>
+                                <th class="py-3 px-4">Nama</th>
+                                <th class="py-3 px-4">NIM</th>
+                                <th class="py-3 px-4">No. HP / WA</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelPendaftar" class="divide-y divide-slate-700 text-sm">
+                            <!-- Data masuk lewat JS -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -64,7 +79,21 @@
     <script>
         const form = document.getElementById('pendaftaranForm');
         const tabelPendaftar = document.getElementById('tabelPendaftar');
-        let dataPendaftar = JSON.parse(localStorage.getItem('data_pendaftar_himsi_umum')) || [];
+        let dataPendaftar = JSON.parse(localStorage.getItem('data_pendaftar_baru_himsi')) || [];
+
+        // PASSWORD ADMIN (Bisa lu ganti di sini, misal "himsi2026")
+        const PASSWORD_RAHASIA = "himsi2026";
+
+        function cekAdmin() {
+            const inputPass = document.getElementById('adminPassword').value;
+            if (inputPass === PASSWORD_RAHASIA) {
+                document.getElementById('adminPanel').classList.remove('hidden');
+                document.getElementById('loginSection').classList.add('hidden');
+                renderTable();
+            } else {
+                alert('Password salah, bro!');
+            }
+        }
 
         function renderTable() {
             tabelPendaftar.innerHTML = '';
@@ -97,10 +126,9 @@
             };
 
             dataPendaftar.unshift(newData);
-            localStorage.setItem('data_pendaftar_himsi_umum', JSON.stringify(dataPendaftar));
-            renderTable();
+            localStorage.setItem('data_pendaftar_baru_himsi', JSON.stringify(dataPendaftar));
             form.reset();
-            alert('Pendaftaran berhasil dikirim!');
+            alert('Pendaftaran berhasil dikirim! Terima kasih.');
         });
 
         function exportToCSV() {
@@ -120,8 +148,6 @@
             link.click();
             document.body.removeChild(link);
         }
-
-        renderTable();
     </script>
 </body>
 </html>
