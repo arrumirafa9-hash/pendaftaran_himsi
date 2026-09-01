@@ -6,33 +6,62 @@
     <title>Pendaftaran Anggota HIMSI</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        /* Background Tema Robot & Kabel Jaringan Sirkuit Cyber */
+        /* Background Cyber Tech Elegan */
         body {
             background-color: #040914;
             background-image: 
                 radial-gradient(circle at 50% 30%, rgba(14, 116, 144, 0.25) 0%, transparent 60%),
                 radial-gradient(circle at 20% 80%, rgba(30, 58, 138, 0.3) 0%, transparent 50%),
-                url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop');
+                url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1920&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
-        /* Efek gelap transparan agar form dan teks tetap sangat jelas dibaca */
         body::before {
             content: "";
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(4, 9, 20, 0.82);
+            background: rgba(4, 9, 20, 0.86);
             z-index: 0;
             pointer-events: none;
+        }
+
+        /* Efek Garis Kabel Sirkuit Cyber di Border Kotak */
+        .cyber-card {
+            background: rgba(15, 23, 42, 0.88);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(6, 182, 212, 0.4);
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.15), inset 0 0 15px rgba(6, 182, 212, 0.05);
+            position: relative;
+        }
+        .cyber-card::after {
+            content: '';
+            position: absolute;
+            top: -1px; right: 20px;
+            width: 40px; height: 2px;
+            background: linear-gradient(90deg, transparent, #06b6d4, transparent);
+        }
+
+        /* Efek Input ala Terminal / Panel Sistem */
+        .cyber-input {
+            background: rgba(3, 7, 18, 0.9);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: #f8fafc;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s ease;
+        }
+        .cyber-input:focus {
+            border-color: #06b6d4;
+            box-shadow: 0 0 12px rgba(6, 182, 212, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.6);
+            outline: none;
         }
     </style>
 </head>
 <body class="text-slate-100 min-h-screen p-4 md:p-8 relative">
     <div class="max-w-4xl mx-auto space-y-6 relative z-10">
         <!-- Header dengan Logo Kiri & Kanan -->
-        <div class="bg-slate-900/85 backdrop-blur-xl p-6 rounded-2xl border border-cyan-500/30 shadow-[0_0_30px_rgba(0,0,0,0.6)] flex items-center justify-between gap-4">
+        <div class="cyber-card p-6 rounded-2xl flex items-center justify-between gap-4">
             <!-- Logo Kiri (4984.jpg) -->
             <div class="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 bg-slate-950/90 rounded-xl border border-cyan-500/40 flex items-center justify-center p-1.5 overflow-hidden shadow-inner">
                 <img src="4984.jpg" alt="Logo HIMSI" class="w-full h-full object-contain" onerror="this.src='https://placehold.co/80x80/0f172a/38bdf8?text=HIMSI'">
@@ -51,47 +80,70 @@
             </div>
         </div>
 
-        <!-- Form Pendaftaran -->
-        <div class="bg-slate-900/85 backdrop-blur-xl p-6 sm:p-8 rounded-2xl border border-cyan-500/30 shadow-[0_0_30px_rgba(0,0,0,0.6)]">
+        <!-- Form Pendaftaran dengan Aksen Robot & Kabel -->
+        <div class="cyber-card p-6 sm:p-8 rounded-2xl">
+            <div class="mb-4 pb-2 border-b border-cyan-900/50 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="text-lg">🤖</span>
+                    <span class="text-xs font-mono text-cyan-400 tracking-wider">>> SYSTEM_REGISTRATION_PORTAL</span>
+                </div>
+                <span class="flex h-2 w-2 relative">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                </span>
+            </div>
+
             <form id="pendaftaranForm" class="space-y-4">
                 <div>
-                    <label class="block text-sm font-semibold text-slate-300 mb-1">Nama Lengkap</label>
-                    <input type="text" id="nama" required class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 text-slate-100 placeholder-slate-500 shadow-inner transition" placeholder="Masukkan nama lengkap">
+                    <label class="block text-sm font-semibold text-cyan-300 mb-1 flex items-center gap-1.5">
+                        <span>🤖</span> Nama Lengkap
+                    </label>
+                    <input type="text" id="nama" required class="w-full cyber-input rounded-xl px-4 py-3 placeholder-slate-600" placeholder="Masukkan nama lengkap">
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-semibold text-slate-300 mb-1">NIM</label>
-                        <input type="text" id="nim" required class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 text-slate-100 placeholder-slate-500 shadow-inner transition" placeholder="Masukkan NIM">
+                        <label class="block text-sm font-semibold text-cyan-300 mb-1 flex items-center gap-1.5">
+                            <span>⚡</span> NIM
+                        </label>
+                        <input type="text" id="nim" required class="w-full cyber-input rounded-xl px-4 py-3 placeholder-slate-600" placeholder="Masukkan NIM">
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-slate-300 mb-1">Nomor HP / WhatsApp</label>
-                        <input type="tel" id="no_hp" required class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 text-slate-100 placeholder-slate-500 shadow-inner transition" placeholder="Contoh: 081234567890">
+                        <label class="block text-sm font-semibold text-cyan-300 mb-1 flex items-center gap-1.5">
+                            <span>💬</span> Nomor HP / WhatsApp
+                        </label>
+                        <input type="tel" id="no_hp" required class="w-full cyber-input rounded-xl px-4 py-3 placeholder-slate-600" placeholder="Contoh: 081234567890">
                     </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-slate-300 mb-1">Alamat Email Aktif</label>
-                    <input type="email" id="email" required class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 text-slate-100 placeholder-slate-500 shadow-inner transition" placeholder="Contoh: nama@gmail.com">
+                    <label class="block text-sm font-semibold text-cyan-300 mb-1 flex items-center gap-1.5">
+                        <span>📧</span> Alamat Email Aktif
+                    </label>
+                    <input type="email" id="email" required class="w-full cyber-input rounded-xl px-4 py-3 placeholder-slate-600" placeholder="Contoh: nama@gmail.com">
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-slate-300 mb-1">Alasan Masuk HIMSI</label>
-                    <textarea id="alasan" rows="3" required class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 text-slate-100 placeholder-slate-500 shadow-inner transition resize-none" placeholder="Tuliskan alasan singkat ingin bergabung dengan HIMSI..."></textarea>
+                    <label class="block text-sm font-semibold text-cyan-300 mb-1 flex items-center gap-1.5">
+                        <span>💡</span> Alasan Masuk HIMSI
+                    </label>
+                    <textarea id="alasan" rows="3" required class="w-full cyber-input rounded-xl px-4 py-3 placeholder-slate-600 resize-none" placeholder="Tuliskan alasan singkat ingin bergabung dengan HIMSI..."></textarea>
                 </div>
-                <button type="submit" class="w-full bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg transition duration-200 cursor-pointer tracking-wider uppercase text-sm">
-                    Kirim Pendaftaran
+                <button type="submit" class="w-full bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-[0_0_20px_rgba(6,182,212,0.4)] transition duration-200 cursor-pointer tracking-wider uppercase text-sm border border-cyan-400/40 flex items-center justify-center gap-2">
+                    <span>🚀</span> Kirim Pendaftaran
                 </button>
             </form>
         </div>
 
         <!-- Panel Khusus Admin / Pengurus -->
-        <div class="bg-slate-900/85 backdrop-blur-xl p-6 sm:p-8 rounded-2xl border border-cyan-500/30 shadow-[0_0_30px_rgba(0,0,0,0.6)] space-y-4">
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-slate-800/80 pb-4">
+        <div class="cyber-card p-6 sm:p-8 rounded-2xl space-y-4">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-cyan-950 pb-4">
                 <div>
-                    <h2 class="text-xl font-bold text-white">Panel Rekap Admin</h2>
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <span>🔐</span> Panel Rekap Admin
+                    </h2>
                     <p class="text-xs text-slate-400 mt-0.5">Khusus pengurus untuk melihat data dan download Excel.</p>
                 </div>
                 <div id="loginSection" class="flex gap-2 w-full sm:w-auto">
-                    <input type="password" id="adminPassword" placeholder="Password Admin" class="bg-slate-950/80 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-cyan-500 shadow-inner">
-                    <button onclick="cekAdmin()" class="bg-slate-800 hover:bg-slate-700 text-white text-sm font-medium px-4 py-2 rounded-xl transition duration-200 cursor-pointer border border-slate-700">Buka</button>
+                    <input type="password" id="adminPassword" placeholder="Password Admin" class="cyber-input rounded-xl px-3 py-2 text-sm text-slate-100 placeholder-slate-600">
+                    <button onclick="cekAdmin()" class="bg-slate-800 hover:bg-slate-700 text-white text-sm font-medium px-4 py-2 rounded-xl transition duration-200 cursor-pointer border border-cyan-500/35">Buka</button>
                 </div>
             </div>
 
@@ -105,10 +157,10 @@
                         Download CSV / Excel
                     </button>
                 </div>
-                <div class="overflow-x-auto rounded-xl border border-slate-800">
+                <div class="overflow-x-auto rounded-xl border border-cyan-950">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="bg-slate-950/80 border-b border-slate-800 text-slate-400 text-xs uppercase tracking-wider">
+                            <tr class="bg-slate-950/90 border-b border-cyan-950 text-cyan-400 text-xs uppercase tracking-wider">
                                 <th class="py-3 px-4">Waktu</th>
                                 <th class="py-3 px-4">Nama</th>
                                 <th class="py-3 px-4">NIM</th>
