@@ -6,73 +6,76 @@
     <title>Pendaftaran Anggota HIMSI</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        /* Efek Background Robot Watermark yang Elegan */
+        /* Background Elegan dengan Watermark Robot di Tengah */
         body {
-            background-color: #0b1329;
-            background-image: linear-gradient(to bottom, rgba(11, 19, 41, 0.92), rgba(15, 23, 42, 0.95)), url('robot_bg.png');
-            background-size: 350px auto;
-            background-position: center;
-            background-repeat: repeat;
+            background-color: #070f24;
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(30, 58, 138, 0.35) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(15, 23, 42, 0.9) 0%, transparent 60%),
+                url('4992.jpg');
+            background-size: 400px auto, cover, 450px auto;
+            background-position: center, center, center;
+            background-repeat: no-repeat, no-repeat, no-repeat;
             background-attachment: fixed;
         }
     </style>
 </head>
 <body class="text-slate-100 min-h-screen p-4 md:p-8">
-    <div class="max-w-4xl mx-auto space-y-6">
+    <div class="max-w-4xl mx-auto space-y-6 relative z-10">
         <!-- Header dengan Logo Kiri & Kanan -->
-        <div class="bg-slate-900/90 backdrop-blur-md p-6 rounded-2xl border border-blue-500/30 shadow-2xl flex items-center justify-between gap-4">
-            <!-- Logo Kiri -->
-            <div class="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 bg-slate-950/80 rounded-xl border border-blue-500/30 flex items-center justify-center p-1 overflow-hidden shadow-inner">
-                <img src="logo_himsi.png" alt="Logo HIMSI" class="w-full h-full object-contain" onerror="this.src='https://placehold.co/80x80/0f172a/38bdf8?text=HIMSI'">
+        <div class="bg-slate-900/85 backdrop-blur-xl p-6 rounded-2xl border border-blue-500/30 shadow-[0_0_30px_rgba(0,0,0,0.5)] flex items-center justify-between gap-4">
+            <!-- Logo Kiri (4984.jpg) -->
+            <div class="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 bg-slate-950/90 rounded-xl border border-blue-500/40 flex items-center justify-center p-1.5 overflow-hidden shadow-inner">
+                <img src="4984.jpg" alt="Logo HIMSI" class="w-full h-full object-contain" onerror="this.src='https://placehold.co/80x80/0f172a/38bdf8?text=HIMSI'">
             </div>
 
             <!-- Judul Tengah -->
             <div class="text-center flex-grow">
-                <span class="text-xs uppercase tracking-widest text-blue-400 font-semibold">Open Recruitment</span>
-                <h1 class="text-xl sm:text-2xl font-extrabold text-white mt-0.5 tracking-wide">Pendaftaran Anggota HIMSI</h1>
-                <p class="text-xs sm:text-sm text-slate-300 mt-1">Himpunan Mahasiswa Sistem Information • ITB Swadharma</p>
+                <span class="text-[10px] sm:text-xs uppercase tracking-widest text-blue-400 font-bold bg-blue-950/60 px-3 py-1 rounded-full border border-blue-800/50">Open Recruitment</span>
+                <h1 class="text-xl sm:text-2xl font-black text-white mt-2 tracking-wide">Pendaftaran Anggota HIMSI</h1>
+                <p class="text-xs sm:text-sm text-slate-300 mt-0.5">Himpunan Mahasiswa Sistem Informasi • ITB Swadharma</p>
             </div>
 
-            <!-- Logo Kanan -->
-            <div class="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 bg-slate-950/80 rounded-xl border border-blue-500/30 flex items-center justify-center p-1 overflow-hidden shadow-inner">
-                <img src="logo_itbs.png" alt="Logo ITBS" class="w-full h-full object-contain" onerror="this.src='https://placehold.co/80x80/0f172a/38bdf8?text=ITBS'">
+            <!-- Logo Kanan (4987.jpg) -->
+            <div class="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 bg-slate-950/90 rounded-xl border border-blue-500/40 flex items-center justify-center p-1.5 overflow-hidden shadow-inner">
+                <img src="4987.jpg" alt="Logo ITBS" class="w-full h-full object-contain" onerror="this.src='https://placehold.co/80x80/0f172a/38bdf8?text=ITBS'">
             </div>
         </div>
 
         <!-- Form Pendaftaran -->
-        <div class="bg-slate-900/90 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-blue-500/30 shadow-2xl">
+        <div class="bg-slate-900/85 backdrop-blur-xl p-6 sm:p-8 rounded-2xl border border-blue-500/30 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
             <form id="pendaftaranForm" class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium text-slate-300 mb-1">Nama Lengkap</label>
-                    <input type="text" id="nama" required class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500 text-slate-100 placeholder-slate-500 shadow-inner" placeholder="Masukkan nama lengkap">
+                    <label class="block text-sm font-semibold text-slate-300 mb-1">Nama Lengkap</label>
+                    <input type="text" id="nama" required class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 text-slate-100 placeholder-slate-500 shadow-inner transition" placeholder="Masukkan nama lengkap">
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-slate-300 mb-1">NIM</label>
-                        <input type="text" id="nim" required class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500 text-slate-100 placeholder-slate-500 shadow-inner" placeholder="Masukkan NIM">
+                        <label class="block text-sm font-semibold text-slate-300 mb-1">NIM</label>
+                        <input type="text" id="nim" required class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 text-slate-100 placeholder-slate-500 shadow-inner transition" placeholder="Masukkan NIM">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-slate-300 mb-1">Nomor HP / WhatsApp</label>
-                        <input type="tel" id="no_hp" required class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500 text-slate-100 placeholder-slate-500 shadow-inner" placeholder="Contoh: 081234567890">
+                        <label class="block text-sm font-semibold text-slate-300 mb-1">Nomor HP / WhatsApp</label>
+                        <input type="tel" id="no_hp" required class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 text-slate-100 placeholder-slate-500 shadow-inner transition" placeholder="Contoh: 081234567890">
                     </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-300 mb-1">Alamat Email Aktif</label>
-                    <input type="email" id="email" required class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500 text-slate-100 placeholder-slate-500 shadow-inner" placeholder="Contoh: nama@gmail.com">
+                    <label class="block text-sm font-semibold text-slate-300 mb-1">Alamat Email Aktif</label>
+                    <input type="email" id="email" required class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 text-slate-100 placeholder-slate-500 shadow-inner transition" placeholder="Contoh: nama@gmail.com">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-300 mb-1">Alasan Masuk HIMSI</label>
-                    <textarea id="alasan" rows="3" required class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500 text-slate-100 placeholder-slate-500 shadow-inner resize-none" placeholder="Tuliskan alasan singkat ingin bergabung dengan HIMSI..."></textarea>
+                    <label class="block text-sm font-semibold text-slate-300 mb-1">Alasan Masuk HIMSI</label>
+                    <textarea id="alasan" rows="3" required class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 text-slate-100 placeholder-slate-500 shadow-inner transition resize-none" placeholder="Tuliskan alasan singkat ingin bergabung dengan HIMSI..."></textarea>
                 </div>
-                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-3 px-4 rounded-xl shadow-lg transition duration-200 cursor-pointer tracking-wide">
+                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg transition duration-200 cursor-pointer tracking-wider uppercase text-sm">
                     Kirim Pendaftaran
                 </button>
             </form>
         </div>
 
         <!-- Panel Khusus Admin / Pengurus -->
-        <div class="bg-slate-900/90 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-blue-500/30 shadow-2xl space-y-4">
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-slate-800 pb-4">
+        <div class="bg-slate-900/85 backdrop-blur-xl p-6 sm:p-8 rounded-2xl border border-blue-500/30 shadow-[0_0_30px_rgba(0,0,0,0.5)] space-y-4">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-slate-800/80 pb-4">
                 <div>
                     <h2 class="text-xl font-bold text-white">Panel Rekap Admin</h2>
                     <p class="text-xs text-slate-400 mt-0.5">Khusus pengurus untuk melihat data dan download Excel.</p>
@@ -96,7 +99,7 @@
                 <div class="overflow-x-auto rounded-xl border border-slate-800">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="bg-slate-950/60 border-b border-slate-800 text-slate-400 text-xs uppercase tracking-wider">
+                            <tr class="bg-slate-950/80 border-b border-slate-800 text-slate-400 text-xs uppercase tracking-wider">
                                 <th class="py-3 px-4">Waktu</th>
                                 <th class="py-3 px-4">Nama</th>
                                 <th class="py-3 px-4">NIM</th>
@@ -117,7 +120,7 @@
     <script>
         const form = document.getElementById('pendaftaranForm');
         const tabelPendaftar = document.getElementById('tabelPendaftar');
-        let dataPendaftar = JSON.parse(localStorage.getItem('data_pendaftar_himsi_v2')) || [];
+        let dataPendaftar = JSON.parse(localStorage.getItem('data_pendaftar_himsi_v3')) || [];
 
         // PASSWORD ADMIN
         const PASSWORD_RAHASIA = "himsi2026";
@@ -168,7 +171,7 @@
             };
 
             dataPendaftar.unshift(newData);
-            localStorage.setItem('data_pendaftar_himsi_v2', JSON.stringify(dataPendaftar));
+            localStorage.setItem('data_pendaftar_himsi_v3', JSON.stringify(dataPendaftar));
             form.reset();
             alert('Pendaftaran berhasil dikirim! Terima kasih.');
         });
@@ -180,7 +183,6 @@
             }
             let csvContent = "data:text/csv;charset=utf-8,Waktu Daftar,Nama,NIM,No HP,Email,Alasan Masuk\r\n";
             dataPendaftar.forEach(row => {
-                // Bersihkan koma atau enter di alasan agar format CSV aman
                 let cleanAlasan = row.alasan.replace(/"/g, '""').replace(/(\r\n|\n|\r)/gm, " ");
                 csvContent += `"${row.waktu}","${row.nama}","${row.nim}","${row.no_hp}","${row.email}","${cleanAlasan}"\r\n`;
             });
