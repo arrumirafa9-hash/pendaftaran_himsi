@@ -27,7 +27,7 @@
             pointer-events: none;
         }
 
-        /* Kotak Utama dengan Efek Kabel Sirkuit Neon */
+        /* Kotak Utama dengan Efek Border Cyber */
         .cyber-card {
             background: rgba(10, 15, 30, 0.92);
             backdrop-filter: blur(16px);
@@ -36,22 +36,22 @@
             position: relative;
         }
 
-        /* Efek Jalur Kabel Sirkuit / Garis Laser di Sudut Kotak */
+        /* Hiasan Titik Node & Cabang Kabel Sirkuit di Sudut Kotak */
         .cyber-card::before {
             content: '';
             position: absolute;
-            top: -6px; left: 20px;
-            width: 80px; height: 3px;
+            top: -7px; left: 25px;
+            width: 100px; height: 3px;
             background: #38bdf8;
-            box-shadow: 0 0 10px #06b6d4;
+            box-shadow: 0 0 10px #06b6d4, 100px 0 0 #38bdf8, 100px -4px 0 #38bdf8; /* Efek cabang titik sirkuit */
         }
         .cyber-card::after {
             content: '';
             position: absolute;
-            bottom: -6px; right: 20px;
-            width: 80px; height: 3px;
+            bottom: -7px; right: 25px;
+            width: 100px; height: 3px;
             background: #38bdf8;
-            box-shadow: 0 0 10px #06b6d4;
+            box-shadow: 0 0 10px #06b6d4, -100px 0 0 #38bdf8, -100px 4px 0 #38bdf8; /* Efek cabang titik sirkuit */
         }
 
         /* Kotak Input dengan Border Kabel Sirkuit Menyala */
@@ -61,7 +61,6 @@
             color: #f8fafc;
             box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.8), 0 0 8px rgba(6, 182, 212, 0.1);
             transition: all 0.3s ease;
-            position: relative;
         }
         .cyber-input:focus {
             border-color: #38bdf8;
@@ -69,12 +68,23 @@
             outline: none;
         }
 
-        /* Garis Pemisah ala Motherboard */
+        /* Garis Pemisah ala Motherboard Bercabang */
         .circuit-line {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #06b6d4, transparent);
-            box-shadow: 0 0 8px #06b6d4;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #06b6d4, #38bdf8, #06b6d4, transparent);
+            box-shadow: 0 0 10px #06b6d4;
             margin: 12px 0;
+            position: relative;
+        }
+        .circuit-line::after {
+            content: '';
+            position: absolute;
+            top: -3px; left: 50%;
+            transform: translateX(-50%);
+            width: 8px; height: 8px;
+            background: #38bdf8;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #38bdf8;
         }
     </style>
 </head>
@@ -100,12 +110,12 @@
             </div>
         </div>
 
-        <!-- Form Pendaftaran dengan Efek Kabel Sirkuit Nyata -->
+        <!-- Form Pendaftaran dengan Efek Kabel Sirkuit Bercabang -->
         <div class="cyber-card p-6 sm:p-8 rounded-2xl">
             <div class="mb-4 pb-2 flex items-center justify-between">
                 <div class="flex items-center gap-2">
                     <span class="text-lg">🤖</span>
-                    <span class="text-xs font-mono text-cyan-300 tracking-wider font-bold">>> SYSTEM_CIRCUIT_REGISTRATION</span>
+                    <span class="text-xs font-mono text-cyan-300 tracking-wider font-bold">>> SYSTEM_CIRCUIT_BRANCH_REGISTRATION</span>
                 </div>
                 <span class="flex h-2 w-2 relative">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
